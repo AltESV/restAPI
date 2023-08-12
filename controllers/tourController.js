@@ -7,7 +7,14 @@ exports.getAllTours = async (req, res) => {
         const queryObj = {...req.query}; 
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete queryObj[el]);
-        const query = await Tour.find(queryObj);
+
+//ADVANCED FILTERING
+        let queryStr = JSON.stringify(queryObj);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+        console.log(JSON.parse(queryStr));
+
+        const query = await Tour.find(JSON.parse(queryStr));
+
 
         // const query = await Tour.find()
         //     .where('duration')
@@ -26,7 +33,7 @@ exports.getAllTours = async (req, res) => {
             }
         }) 
     } catch (err) {
-        res.send(404).json({
+        res.status(404).json({
             status: 'fail',
             message: err
         })
