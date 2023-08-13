@@ -24,8 +24,7 @@ Getting Started
 Directory Structure
 -------------------
 
-plaintextCopy code
-
+```plaintext
 `restAPI/
 ┣ controllers/
 ┣ dev-data/
@@ -41,6 +40,7 @@ plaintextCopy code
 ┣ package-lock.json
 ┣ package.json
 ┗ server.js`
+```
 
 API Endpoints
 -------------
